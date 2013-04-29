@@ -7,7 +7,7 @@ window.addEventListener("load",function() {
 var title = $('.jumbotron h2');
 
 // socket
-var socket = io.connect('http://repoll-server.herokuapp.com/client');
+var socket = io.connect('http://repoll.herokuapp.com/client');
 
 socket.on('connect', function() {
   console.log('socket.io connected');
