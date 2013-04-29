@@ -68,7 +68,7 @@ io.of('/master').on('connection', function(master) {
     console.log('master ready event');
     isMasterReady = true;
     for (var id in clients)
-      clients[id].emit('master_ready', {});
+      clients[id].emit('master_ready', data);
   })
 });
 

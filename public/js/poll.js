@@ -14,7 +14,7 @@ socket.on('connect', function() {
 });
 
 socket.on('master_ready', function(data) {
-  console.log('master ready to vote');
+  console.log('master ready to vote ' + data);
   title.text('Pick what you want!');
 });
 
