@@ -14,7 +14,9 @@ socket.on('connect', function() {
 });
 
 socket.on('master_ready', function(data) {
-  console.log('master ready to vote ' + JSON.parse(data));
+  if (data)
+    console.log('master ready to vote ' + JSON.parse(data));
+
   title.text('Pick what you want!');
 });
 
