@@ -19,8 +19,11 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+
+// for heroku
+io.configure(function() {
+  io.set('transports', ['xhr-polling']);
+  io.set('polling duration', 10);
 })
 
 // development only
