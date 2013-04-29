@@ -4,6 +4,14 @@ window.addEventListener("load",function() {
   }, 1000);
 });
 
+function isEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop))
+      return false;
+  }
+  return true;
+}
+
 var title = $('.jumbotron h2');
 
 // socket
@@ -14,7 +22,7 @@ socket.on('connect', function() {
 });
 
 socket.on('master_ready', function(data) {
-  if (data)
+  if (isEmpty(data))
     console.log('master ready to vote ' + JSON.parse(data));
 
   title.text('Pick what you want!');
