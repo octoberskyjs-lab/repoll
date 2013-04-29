@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // for heroku
 io.configure(function() {
   io.set('transports', ['xhr-polling']);
-  io.set('polling duration', 10);
+  io.set('polling duration', 5);
 })
 
 // development only
@@ -64,11 +64,11 @@ io.of('/master').on('connection', function(master) {
       clients[id].emit('master_lost', {});
   });
 
-  master.on('master_ready', function(data) {
-    console.log('master ready event');
+  master.on('master_ready', function(masterData) {
+    console.log('master ready event ' + masterData);
     isMasterReady = true;
     for (var id in clients)
-      clients[id].emit('master_ready', data);
+      clients[id].emit('master_ready', masterData);
   })
 });
 

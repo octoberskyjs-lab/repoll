@@ -16,15 +16,22 @@ var title = $('.jumbotron h2');
 
 // socket
 var socket = io.connect('http://repoll.herokuapp.com/client');
+//var socket = io.connect('http://192.168.0.102:3000/client');
 
 socket.on('connect', function() {
   console.log('socket.io connected');
 });
 
 socket.on('master_ready', function(data) {
-  if (isEmpty(data))
-    console.log('master ready to vote ' + JSON.parse(data));
-
+  var parsed;
+  try {
+    parsed = JSON.parse(data);
+  } catch (e) {
+    console.log('json parse exception');
+    return;
+  }
+  console.log('master ready to vote with data!!');
+  // build views
   title.text('Pick what you want!');
 });
 
