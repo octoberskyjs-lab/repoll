@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // for heroku
 io.configure(function() {
   io.set('transports', ['xhr-polling']);
-  io.set('polling duration', 5);
+  io.set('polling duration', 10);
 })
 
 // development only
@@ -38,6 +38,7 @@ app.get('/', function(req, res) {
 
 var masters = {};
 var clients = {};
+var chartData = {'chart':'none'};
 var isMasterReady = false;
 
 var cacheItem = function(item, cache, callback) {
@@ -59,28 +60,32 @@ io.of('/master').on('connection', function(master) {
   master.on('disconnect', function() {
     delete masters[master.id];
     isMasterReady = false;
+    chartData = {'chart':'none'};
     console.log('master disconnected');
     for (var id in clients)
       clients[id].emit('master_lost', {});
   });
 
+  master.on('force_disconnect', function() {
+    master.disconnect();
+  });
+
   master.on('master_ready', function(masterData) {
     console.log('master ready event ' + masterData);
+    chartData = masterData;
     isMasterReady = true;
     for (var id in clients)
-      clients[id].emit('master_ready', masterData);
+      clients[id].emit('master_ready', chartData);
   })
 });
 
 io.of('/client').on('connection', function(client) {
   console.log('client connected - ' + client.id);
 
-  if (isMasterReady)
-    client.emit('master_ready', {});
+  client.emit('master_ready', chartData);
 
   cacheItem(client, clients, function() {
     console.log('client cached & ready to emit');
-
   });
 
   client.on('disconnect', function() {
