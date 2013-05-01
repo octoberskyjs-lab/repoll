@@ -88,6 +88,10 @@ io.of('/client').on('connection', function(client) {
     console.log('client cached & ready to emit');
   });
 
+  client.on('force_disconnect', function() {
+    client.disconnect();
+  });
+
   client.on('disconnect', function() {
     delete clients[client.id];
     console.log('client disconnected');

@@ -54,3 +54,7 @@ sio.on('master_lost', function(data) {
   console.log('master lost');
   masterNotReady();
 });
+
+window.onbeforeunload = function() {
+  sio.emit('force_disconnect');
+}
