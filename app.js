@@ -96,7 +96,7 @@ io.of('/client').on('connection', function(client) {
   client.on('client_vote', function(data) {
     console.log('client try to vote');
     for (var id in masters) {
-      masters[id].emit('client_intent', {hello:'master!!'});
+      masters[id].emit('client_vote', data);
     }
   });
 });

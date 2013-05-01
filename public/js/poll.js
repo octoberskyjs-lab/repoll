@@ -9,9 +9,9 @@ var voteButtons    = $('.marketing');
 var templateSource = $('#vote-template').html();
 var voteTemplate   = Handlebars.compile(templateSource);
 
-var isDebug = document.location.hostname === 'localhost';
-var socket = io.connect(isDebug ?
-  'http://localhost:3000/client' :
+var isDebug = document.location.hostname !== 'repoll.herokuapp.com';
+var sio = io.connect(isDebug ?
+  'http://192.168.0.102:3000/client' :
   'http://repoll.herokuapp.com/client'
 );
 
@@ -19,19 +19,27 @@ var masterNotReady = function() {
   console.log('master not ready');
   title.text('No Polls Yet...');
   voteButtons.hide();
+  $('.btn.btn-large.span12').remove();
 };
 
-var masterReady = function() {
+var masterReady = function(chartData) {
   title.text('Pick what you want!');
-  voteButtons.append(voteTemplate({pp:['q1','q2','q3']}));
+  voteButtons.append(voteTemplate(JSON.parse(chartData)));
   voteButtons.show();
+  $('.btn.btn-large.span12').on('click', function(e) {
+    e.preventDefault();
+    console.log('btn clicked!');
+    var index = $(this).data('index');
+    sio.emit('client_vote', {selected:index});
+
+  });
 };
 
-socket.on('connect', function() {
+sio.on('connect', function() {
   console.log('socket.io connected');
 });
 
-socket.on('master_ready', function(chartData) {
+sio.on('master_ready', function(chartData) {
   if (chartData.chart && chartData.chart === 'none') {
     masterNotReady();
     return;
@@ -42,13 +50,7 @@ socket.on('master_ready', function(chartData) {
   masterReady(chartData);
 });
 
-socket.on('master_lost', function(data) {
+sio.on('master_lost', function(data) {
   console.log('master lost');
-  title.text('No Polls Yet...');
-});
-
-// ui event
-$('.span12 .btn').on('click', function(e) {
-  e.preventDefault();
   masterNotReady();
 });
