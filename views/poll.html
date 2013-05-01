@@ -65,12 +65,16 @@
     </div>
     <hr>
     <div class="row-fluid marketing">
-        <div class="span12">
-            <a class="btn btn-large btn-info" type="submit">vote</a>
-        </div>
+            <!--<a class="btn btn-large btn-info span6" type="submit">vote</a>-->
+            <script id="vote-template" type="text/x-handlebars-tempalte">
+                {{#each pp}}
+                <a class="btn btn-large btn-info span12" type="submit">{{this}}</a>
+                {{/each}}
+            </script>
     </div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://raw.github.com/wycats/handlebars.js/1.0.0-rc.3/dist/handlebars.js"></script>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="/js/poll.js"></script>
 <script type="text/javascript" src="/js/bootstrap.js"></script>
