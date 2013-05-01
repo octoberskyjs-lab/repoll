@@ -6,17 +6,18 @@ simple poll server for hack
 
 ```
             1.master_ready
-              (char info)      2.master_ready
- +-----------+          +--------+          +---------+
- | reveal.js | -------> | repoll | -------> | clients |
- |  (master) | <------- | server | <------- |         |
- +-----------+          +--------+          +---------+
-           4.client_vote         3.client_vote
+              (char info)         2.master_ready
+ +-----------+          +----------+          +---------+
+ | reveal.js | -------> |  repoll  | -------> |         |
+ |  (master) |          |  server  |          | clients |
+ |           | <------- | (heroku) | <------- |         |
+ +-----------+          +----------+          +---------+
+           4.client_vote           3.client_vote
 ```
 
-### master_ready
+### master_ready event data
 
-send chart data to server & to client
+send pie chart data to server. server will automatically fire to connected clients with received data.
 
 ```
 [
@@ -38,7 +39,7 @@ send chart data to server & to client
 ]
 ```
 
-### client_vote
+### client_vote event data
 
 send selected index to server
 
