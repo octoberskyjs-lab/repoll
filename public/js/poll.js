@@ -24,6 +24,11 @@ var masterNotReady = function() {
 
 var masterReady = function(chartData) {
   title.text('Pick what you want!');
+
+  if (voteButtons.children().length >= 1) {
+    $('.btn.btn-large.span12').remove();
+  }
+
   voteButtons.append(voteTemplate(JSON.parse(chartData)));
   voteButtons.show();
   $('.btn.btn-large.span12').on('click', function(e) {
