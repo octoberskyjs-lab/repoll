@@ -68,7 +68,9 @@
             <!--<a class="btn btn-large btn-info span6" type="submit">vote</a>-->
             <script id="vote-template" type="text/x-handlebars-tempalte">
                 {{#each this}}
-                <a class="btn btn-large span12" type="submit" data-index="{{@index}}">{{desc}}</a>
+                <a class="btn btn-large span12" type="submit" data-index="{{@index}}">
+                    <i style="background-color:{{color}}"></i>{{desc}}
+                </a>
                 {{/each}}
             </script>
     </div>
