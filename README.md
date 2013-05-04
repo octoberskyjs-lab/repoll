@@ -4,8 +4,8 @@ simple poll server for hack
 
 ## Demo
 
-* open master page
-* [client page](http://repoll.herokuapp.com/)
+* open [master page](http://octoberskyjs-lab.github.io/repoll/)
+* open [client page](http://repoll.herokuapp.com/) in other tabs or device
 * select button on client page and enjoy chnages on master page!!
 
 ## socket.io events
