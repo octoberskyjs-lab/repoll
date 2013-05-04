@@ -2,6 +2,12 @@
 
 simple poll server for hack
 
+## Demo
+
+* open master page
+* [client page](http://repoll.herokuapp.com/)
+* select button on client page and enjoy chnages on master page!!
+
 ## socket.io events
 
 ```
