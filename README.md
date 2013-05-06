@@ -6,7 +6,7 @@ simple poll server for hack
 
 * open [master page](http://octoberskyjs-lab.github.io/repoll/)
 * open [client page](http://repoll.herokuapp.com/) in other tabs or device
-* select button on client page and enjoy chnages on master page!!
+* select button on client page and enjoy changes on master page!!
 
 ## socket.io events
 
