@@ -5,6 +5,7 @@ simple poll server for hack
 ## Demo
 
 * open [master page](http://octoberskyjs-lab.github.io/repoll/)
+    * source on [gh-page](https://github.com/octoberskyjs-lab/repoll/tree/gh-pages) branch.
 * open [client page](http://repoll.herokuapp.com/) in other tabs or device
 * select button on client page and enjoy changes on master page!!
 
